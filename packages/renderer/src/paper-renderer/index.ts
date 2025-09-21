@@ -103,6 +103,8 @@ class ExamPaperPage extends HTMLElement {
         ].filter(Boolean) as HTMLElement[]
       );
       this.appendChild(this.table);
+    } else {
+      this.append(...this.layout);
     }
   }
 }

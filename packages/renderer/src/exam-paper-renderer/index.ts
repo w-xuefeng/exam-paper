@@ -68,11 +68,7 @@ export function examPaperRenderer(examPaper: ExamPaperWrapper) {
     layout.push(footerRenderer(footer));
   }
 
-  if (paper.header || paper.footer) {
-    paper.layout = layout;
-  } else {
-    paper.append(...layout);
-  }
+  paper.layout = layout;
 
   return {
     paper,
