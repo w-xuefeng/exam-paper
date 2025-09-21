@@ -1,0 +1,31 @@
+{
+  "name": "@exam-paper/renderer",
+  "version": "0.0.0",
+  "description": "the renderer of exam-paper",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "bun clean && tsc -b ./tsconfig.types.json && rolldown -c",
+    "test": "bun run build && bun test/serve.ts",
+    "prepublish": "bun run build"
+  },
+  "keywords": [],
+  "author": "w-xuefeng",
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^24.5.2",
+    "rolldown": "1.0.0-beta.38"
+  }
+}

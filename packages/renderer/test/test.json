@@ -1,0 +1,361 @@
+{
+  "type": "paper",
+  "paperSize": {
+    "name": "A4",
+    "alias": "大16k",
+    "width_mm": 297,
+    "height_mm": 210,
+    "direction": "landscape"
+  },
+  "value": {
+    "style": {
+      "type": "inline",
+      "value": {
+        "margin": "20px"
+      }
+    },
+    "value": {
+      "header": {
+        "type": "header",
+        "value": {
+          "value": "数学试卷",
+          "style": {
+            "type": "inline",
+            "value": {
+              "textAlign": "center",
+              "fontSize": "24px",
+              "fontWeight": "bold"
+            }
+          }
+        }
+      },
+      "title": {
+        "type": "title",
+        "value": {
+          "value": "<h1>2023年高中数学期中考试</h1>",
+          "style": {
+            "type": "inline",
+            "value": {
+              "textAlign": "center",
+              "fontSize": "20px",
+              "marginBottom": "20px"
+            }
+          }
+        }
+      },
+      "description": {
+        "type": "description",
+        "value": {
+          "value": "<p>考试时间：120分钟 &nbsp;&nbsp; 满分：150分</p><p>注意事项：<br/>1. 答题前请将姓名、班级填写清楚<br/>2. 所有答案必须写在答题卡上<br/>3. 保持卷面整洁，不得在试卷上做任何标记</p>",
+          "style": {
+            "type": "inline",
+            "value": {
+              "textAlign": "left",
+              "fontSize": "14px",
+              "marginBottom": "20px"
+            }
+          }
+        }
+      },
+      "main": [
+        {
+          "type": "blank",
+          "style": {
+            "type": "inline",
+            "value": {
+              "height": "10px"
+            }
+          }
+        },
+        {
+          "type": "title",
+          "value": {
+            "value": "<h2>一、选择题（每题5分，共60分）</h2>",
+            "style": {
+              "type": "css",
+              "value": {
+                "h2": {
+                  "fontWeight": "bold",
+                  "fontSize": "16px",
+                  "marginBottom": "10px"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "single-choice",
+            "orderNumber": "1",
+            "title": {
+              "value": "<p>已知集合 A = {1, 2, 3}，B = {2, 3, 4}，则 A ∩ B = ?</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "options": [
+              {
+                "value": "<p>A. {1}</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>B. {2, 3}</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>C. {1, 4}</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>D. {1, 2, 3, 4}</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              }
+            ],
+            "score": {
+              "formatter": "(%d分)",
+              "value": 5
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "single-choice",
+            "orderNumber": "2",
+            "title": {
+              "value": "<p>函数 f(x) = 2x + 3 的反函数是？</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "options": [
+              {
+                "value": "<p>A. f<sup>-1</sup>(x) = (x - 3)/2</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>B. f<sup>-1</sup>(x) = (x + 3)/2</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>C. f<sup>-1</sup>(x) = 2/(x - 3)</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              },
+              {
+                "value": "<p>D. f<sup>-1</sup>(x) = 2/(x + 3)</p>",
+                "style": {
+                  "type": "inline",
+                  "value": {
+                    "fontSize": "14px"
+                  }
+                }
+              }
+            ],
+            "score": {
+              "formatter": "(%d分)",
+              "value": 5
+            }
+          }
+        },
+        {
+          "type": "blank",
+          "style": {
+            "type": "inline",
+            "value": {
+              "height": "10px"
+            }
+          }
+        },
+        {
+          "type": "title",
+          "value": {
+            "value": "<h2>二、填空题（每题5分，共20分）</h2>",
+            "style": {
+              "type": "css",
+              "value": {
+                "h2": {
+                  "fontWeight": "bold",
+                  "fontSize": "16px",
+                  "marginBottom": "10px"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "fill-in-the-blank",
+            "orderNumber": "1",
+            "title": {
+              "value": "<p>已知直角三角形的两条直角边分别为3和4，则斜边长为 ______。</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "score": {
+              "formatter": "(%d分)",
+              "value": 5
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "fill-in-the-blank",
+            "orderNumber": "2",
+            "title": {
+              "value": "<p>若 log<sub>2</sub>(x) = 3，则 x = ______。</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "score": {
+              "formatter": "(%d分)",
+              "value": 5
+            }
+          }
+        },
+        {
+          "type": "blank",
+          "style": {
+            "type": "inline",
+            "value": {
+              "height": "10px"
+            }
+          }
+        },
+        {
+          "type": "title",
+          "value": {
+            "value": "<h2>三、解答题（共70分）</h2>",
+            "style": {
+              "type": "css",
+              "value": {
+                "h2": {
+                  "fontWeight": "bold",
+                  "fontSize": "16px",
+                  "marginBottom": "10px"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "calculation",
+            "orderNumber": "1",
+            "title": {
+              "value": "<p>（本题10分）解方程：2x<sup>2</sup> - 5x + 2 = 0</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "score": {
+              "formatter": "(%d分)",
+              "value": 10
+            }
+          }
+        },
+        {
+          "type": "question",
+          "value": {
+            "type": "calculation",
+            "orderNumber": "2",
+            "title": {
+              "value": "<p>（本题12分）已知函数 f(x) = x<sup>3</sup> - 3x<sup>2</sup> + 2<br/>（1）求函数的导数<br/>（2）求函数的极值点</p>",
+              "style": {
+                "type": "inline",
+                "value": {
+                  "fontSize": "14px"
+                }
+              }
+            },
+            "score": {
+              "formatter": "(%d分)",
+              "value": 12
+            }
+          }
+        }
+      ],
+      "answer": [
+        {
+          "type": "answer",
+          "value": {
+            "value": "<h3>参考答案</h3><p>一、选择题<br/>1. B &nbsp;&nbsp; 2. A</p><p>二、填空题<br/>1. 5 &nbsp;&nbsp; 2. 8</p><p>三、解答题<br/>1. x = 2 或 x = 1/2<br/>2. (1) f'(x) = 3x² - 6x &nbsp;&nbsp; (2) 极大值点 x = 0，极小值点 x = 2</p>",
+            "style": {
+              "type": "inline",
+              "value": {
+                "fontSize": "14px"
+              }
+            }
+          }
+        }
+      ],
+      "footer": {
+        "type": "footer",
+        "value": {
+          "value": "<p style='text-align: center;'>第 1 页 共 2 页</p>",
+          "style": {
+            "type": "inline",
+            "value": {
+              "textAlign": "center"
+            }
+          }
+        }
+      }
+    }
+  }
+}

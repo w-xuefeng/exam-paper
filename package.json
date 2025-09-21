@@ -1,0 +1,15 @@
+{
+  "name": "exam-paper",
+  "version": "0.0.0",
+  "description": "exam-paper monorepo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "w-xuefeng",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@exam-paper/structure": "workspace:^"
+  }
+}
