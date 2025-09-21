@@ -20,7 +20,7 @@ export function useLogger(
     console[type](`[${prefix}::${intlTimeFormat(new Date())}]`, ...content);
 }
 
-export const Log = useLogger("remote-directory");
+export const Log = useLogger("exam-paper-renderer");
 
 export function createResponse(
   res: ServerResponse<IncomingMessage> & {
