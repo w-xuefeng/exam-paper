@@ -12,7 +12,8 @@
   "exports": {
     ".": {
       "import": "./lib/index.esm.js",
-      "require": "./lib/index.cjs.js"
+      "require": "./lib/index.cjs.js",
+      "types": "./lib/types/index.d.ts"
     }
   },
   "scripts": {
