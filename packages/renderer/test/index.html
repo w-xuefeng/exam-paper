@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exam Paper Test</title>
+  <style>
+    body {
+      background-color: #c1c1c1;
+    }
+  </style>
   <script id="replace-data"></script>
   <script id="replace-script"></script>
 </head>
@@ -12,6 +17,8 @@
 <body>
 
   <script>
+    // delete window.EXAM_DATA.value.layout.header
+    // delete window.EXAM_DATA.value.layout.footer
     EPR.examPaperRenderer(window.EXAM_DATA).mounted()
   </script>
 </body>

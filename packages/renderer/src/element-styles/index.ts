@@ -1,8 +1,31 @@
-import { CSSNestedObjectProperties } from "@exam-paper/structure";
+import type {
+  CSSNestedObjectProperties,
+  PaperOption,
+} from "@exam-paper/structure";
 import { ELEMENTS } from "../consts/elements";
-import { addStyleElement, handleCSSToStyleElement } from "../shared/dom";
+import {
+  addStyleElement,
+  handleCSSToStyleElement,
+  removeDOM,
+} from "../shared/dom";
 
-export function elementDefaultStyles(): CSSNestedObjectProperties {
+export function elementDefaultStyles<Paper extends string>({
+  paper,
+  direction,
+  pagination,
+}: PaperOption<Paper>): CSSNestedObjectProperties {
+  const size = `${paper} ${direction}`;
+  const paginationPrintConfig = pagination?.position
+    ? {
+        [`@${pagination.position}`]: {
+          content: pagination.formatter
+            ?.replace("%current", "counter(page)")
+            .replace("%total", "counter(pages)"),
+          ...(pagination.style ? pagination.style : {}),
+        },
+      }
+    : {};
+
   return {
     [ELEMENTS.PAPER]: {
       display: "block",
@@ -37,14 +60,72 @@ export function elementDefaultStyles(): CSSNestedObjectProperties {
     [ELEMENTS.QUESTION_SCORE]: {
       display: "block",
     },
+    ".exam-paper-table-layout": {
+      width: "100%",
+    },
+    ".print-header, .print-footer": {
+      display: "none",
+    },
+    ".header-placeholder,.footer-placeholder": {
+      display: "none",
+    },
+    "@media print": {
+      "@page": {
+        size,
+        boxSizing: "border-box",
+        ...paginationPrintConfig,
+      },
+      [`${ELEMENTS.FOOTER}, ${ELEMENTS.HEADER}`]: {
+        display: "none",
+      },
+      [`${ELEMENTS.HEADER}.print-header, ${ELEMENTS.FOOTER}.print-footer`]: {
+        display: "block",
+        position: "fixed",
+        left: 0,
+        width: "100%",
+        backgroundColor: "#ffffff",
+        boxSizing: "border-box",
+      },
+      [`${ELEMENTS.HEADER}.print-header`]: {
+        top: 0,
+        borderBlockEnd: "1px solid #ccc",
+        paddingBlockEnd: "5px",
+      },
+      [`${ELEMENTS.FOOTER}.print-footer`]: {
+        bottom: 0,
+        borderBlockStart: "1px solid #ccc",
+        paddingBlockStart: "5px",
+      },
+      ".header-placeholder,.footer-placeholder": {
+        display: "block",
+      },
+      [ELEMENTS.QUESTION]: {
+        breakInside: "avoid",
+      },
+      [ELEMENTS.TITLE]: {
+        breakInside: "avoid",
+      },
+      [`body, ${ELEMENTS.PAPER}`]: {
+        padding: "0!important",
+        margin: "0!important",
+      },
+    },
   };
 }
 
-export function applyElementDefaultStyles() {
+export function applyElementDefaultStyles<Paper extends string>(
+  paperOption: PaperOption<Paper>,
+  container: HTMLElement | ShadowRoot | Document = document
+) {
   const id = "exam-paper-element-agent-style-sheet";
-  if (document.getElementById(id)) return;
-  const styleElement = handleCSSToStyleElement(elementDefaultStyles());
+  const previous =
+    document.getElementById(id) || container.querySelector(`#${id}`);
+  if (previous) {
+    removeDOM(previous);
+  }
+  const styleElement = handleCSSToStyleElement(
+    elementDefaultStyles(paperOption)
+  );
   if (!styleElement) return;
-  styleElement.id = id;
-  addStyleElement(styleElement);
+  addStyleElement(styleElement, id, container);
 }

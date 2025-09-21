@@ -12,7 +12,7 @@ export interface NormalExam {
   header?: HeaderWrapper["value"];
   title?: TitleWrapper["value"];
   description?: DescriptionWrapper["value"];
-  main: (BlankWrapper | TitleWrapper | QuestionWrapper)[];
+  main: (BlankWrapper | TitleWrapper | DescriptionWrapper | QuestionWrapper)[];
   answer?: AnswerWrapper["value"][];
   footer?: FooterWrapper["value"];
 }

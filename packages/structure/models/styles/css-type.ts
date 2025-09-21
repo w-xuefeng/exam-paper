@@ -15,5 +15,10 @@ export interface CSSProperties
 }
 
 export interface CSSNestedObjectProperties extends CSSProperties {
-  [key: string]: CSSNestedObjectProperties | string | number | undefined;
+  [key: string]:
+    | CSSNestedObjectProperties
+    | Record<string, CSSNestedObjectProperties>
+    | string
+    | number
+    | undefined;
 }

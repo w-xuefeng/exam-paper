@@ -1,6 +1,6 @@
 import type { StyleWrapper } from "../styles";
 import type { StructuralType } from "../consts/shared";
-import { TypeWrapper } from "../shared/type";
+import type { TypeWrapper } from "../shared/type";
 
 /**
  * styled content
@@ -8,6 +8,14 @@ import { TypeWrapper } from "../shared/type";
 export type StyledContentWrapper<T = string> = {
   value: T;
   style: StyleWrapper;
+};
+
+/**
+ * layout
+ */
+export type LayoutWrapper<T> = {
+  style: StyleWrapper;
+  layout: T;
 };
 
 /**

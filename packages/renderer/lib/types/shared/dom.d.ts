@@ -42,7 +42,7 @@ export type HTMLOrSVGElementProperties<T = HTMLElement | SVGElement> = Partial<O
     }>;
 }> | null;
 export declare function h<T = HTMLElement | SVGElement>(tagName: string, properties?: HTMLOrSVGElementProperties<T>, children?: (HTMLElement | Node | string)[] | string | HTMLElement | Node): T;
-export declare function handleCSSToStyleElement(css?: string | CSSNestedObjectProperties): HTMLStyleElement | null;
+export declare function handleCSSToStyleElement(css?: string | CSSNestedObjectProperties | Record<string, CSSNestedObjectProperties>): HTMLStyleElement | null;
 export declare function domMountToParent(dom: HTMLElement | Node | null, parent?: HTMLElement | Document | ShadowRoot | string): () => void;
 export declare function removeDOM(dom: HTMLElement | Node | ShadowRoot): void;
 export declare function replaceDOM(original: HTMLElement | Node | ShadowRoot | null, dom: HTMLElement | Node | ShadowRoot | null): Node;

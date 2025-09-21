@@ -3,6 +3,7 @@ import {
   handleCSSToStyleElement,
   h,
   type HTMLOrSVGElementProperties,
+  addClass,
 } from "../shared/dom";
 import { defineRenderer } from "../shared";
 import {
@@ -17,32 +18,43 @@ class ExamPaperStyledContent extends HTMLElement {
   connectedCallback() {}
 }
 
-export function styledContentRenderer(
+export function styledContentRenderer<T = HTMLElement>(
   styledContent: StyledContentWrapper<any>,
   elementName: BuiltInElementNameUnionTypes = ELEMENTS.STYLED,
-  properties?: HTMLOrSVGElementProperties
+  properties?: HTMLOrSVGElementProperties<T>
 ) {
   defineRenderer(ELEMENTS.STYLED, ExamPaperStyledContent);
+
+  const uniqueIdentifier = `${elementName}-${crypto.randomUUID()}`;
+
   const { type, value } = styledContent.style;
 
   const inlineStyle = type === STYLE_TYPE.INLINE ? value : void 0;
 
   const styleElement =
-    type === STYLE_TYPE.CSS ? handleCSSToStyleElement(value) : null;
+    type === STYLE_TYPE.CSS
+      ? handleCSSToStyleElement({
+          [`.${uniqueIdentifier}`]: value,
+        })
+      : null;
 
   if (styleElement) {
     const el = h<HTMLElement>(elementName, properties);
-    const shadowRoot = el.attachShadow({ mode: "open" });
-    shadowRoot.append(
-      styleElement,
-      h<HTMLElement>("main", { innerHTML: styledContent.value })
-    );
-    return el;
+    addClass(el, uniqueIdentifier);
+    el.append(styleElement);
+    if (styledContent.value) {
+      el.append(
+        h<HTMLElement>("main", {
+          innerHTML: styledContent.value,
+        })
+      );
+    }
+    return el as T;
   }
 
   return h<HTMLElement>(elementName, {
     ...properties,
     innerHTML: styledContent.value,
     style: inlineStyle,
-  });
+  }) as T;
 }

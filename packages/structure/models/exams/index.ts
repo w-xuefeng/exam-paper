@@ -1,16 +1,17 @@
 import type { AnswerWrapper } from "../answer";
 import type { StructuralType } from "../consts/shared";
 import type {
-  StyledContentWrapper,
   BlankWrapper,
   DescriptionWrapper,
   FooterWrapper,
   HeaderWrapper,
   TitleWrapper,
+  LayoutWrapper,
 } from "../content/type";
 
-import type { BuiltInPaperNameUnionTypes, PaperSize } from "../papers";
+import type { BuiltInPaperNameUnionTypes, PaperOption } from "../papers";
 import type { QuestionWrapper } from "../questions";
+import type { TypeWrapper } from "../shared/type";
 
 import type { NormalExam } from "./normal-exam";
 export type { NormalExam } from "./normal-exam";
@@ -24,8 +25,7 @@ export type ExamWidget =
   | AnswerWrapper
   | FooterWrapper;
 
-export type ExamPaperWrapper<PS extends string = BuiltInPaperNameUnionTypes> = {
-  type: StructuralType.PAPER;
-  paperSize: PaperSize<PS>;
-  value: StyledContentWrapper<ExamWidget[] | NormalExam>;
-};
+export interface ExamPaperWrapper<
+  Paper extends string = BuiltInPaperNameUnionTypes
+> extends TypeWrapper<StructuralType.PAPER, LayoutWrapper<NormalExam>>,
+    PaperOption<Paper> {}

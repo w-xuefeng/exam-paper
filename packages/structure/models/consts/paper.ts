@@ -12,6 +12,11 @@ export const BUILTIN_PAPER_NAME = [
   "B5",
 ] as const;
 
+export const PAPER_DIRECTION = {
+  PORTRAIT: "portrait",
+  LANDSCAPE: "landscape",
+} as const;
+
 export namespace BuiltInPaperName {
   export type A1 = (typeof BUILTIN_PAPER_NAME)[0];
   export type A2 = (typeof BUILTIN_PAPER_NAME)[1];

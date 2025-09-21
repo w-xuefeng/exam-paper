@@ -410,7 +410,10 @@ export function h<T = HTMLElement | SVGElement>(
 }
 
 export function handleCSSToStyleElement(
-  css?: string | CSSNestedObjectProperties
+  css?:
+    | string
+    | CSSNestedObjectProperties
+    | Record<string, CSSNestedObjectProperties>
 ): HTMLStyleElement | null {
   if (!css) {
     return null;
@@ -425,8 +428,24 @@ export function handleCSSToStyleElement(
     return null;
   }
 
-  function objectToCSS(properties: CSSProperties) {
+  function objectToCSS(
+    properties:
+      | string
+      | number
+      | CSSNestedObjectProperties
+      | Record<string, CSSNestedObjectProperties>
+      | undefined
+  ) {
     let cssString = "";
+
+    if (
+      typeof properties === "string" ||
+      typeof properties === "number" ||
+      !properties
+    ) {
+      return cssString;
+    }
+
     for (const [prop, value] of Object.entries(properties)) {
       if (typeof value === "string" || typeof value === "number") {
         const cssProperty = prop.replace(/([A-Z])/g, "-$1").toLowerCase();
@@ -439,7 +458,11 @@ export function handleCSSToStyleElement(
     return cssString.trim();
   }
 
-  function jsonToCSS(cssRecord: CSSProperties): string {
+  function jsonToCSS(
+    cssRecord:
+      | CSSNestedObjectProperties
+      | Record<string, CSSNestedObjectProperties>
+  ): string {
     let cssString = "";
     for (const [selector, properties] of Object.entries(cssRecord)) {
       cssString += `${selector} {${objectToCSS(properties)}}`;

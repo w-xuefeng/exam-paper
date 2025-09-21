@@ -12,7 +12,6 @@ import { headerRenderer } from "../header-renderer";
 import { footerRenderer } from "../footer-renderer";
 import { answerRenderer } from "../answer-renderer";
 import { domMountToParent } from "../shared/dom";
-import { applyElementDefaultStyles } from "../element-styles";
 
 export function matchRender(examWidget: ExamWidget) {
   switch (examWidget.type) {
@@ -37,49 +36,49 @@ export function matchRender(examWidget: ExamWidget) {
 
 export function examPaperRenderer(examPaper: ExamPaperWrapper) {
   const {
-    value: { value: exam },
+    value: { layout: exam },
   } = examPaper;
 
   const paper = paperRenderer(examPaper);
   const layout: HTMLElement[] = [];
 
-  if (Array.isArray(exam)) {
-    const mains = exam.map(matchRender).filter(Boolean) as HTMLElement[];
-    layout.push(...mains);
-  } else {
-    const { header, title, description, main, answer, footer } = exam;
+  const { header, title, description, main, answer, footer } = exam;
 
-    if (header) {
-      layout.push(headerRenderer(header));
-    }
-
-    if (title) {
-      layout.push(titleRenderer(title));
-    }
-
-    if (description) {
-      layout.push(descriptionRenderer(description));
-    }
-
-    if (main) {
-      layout.push(...(main.map(matchRender).filter(Boolean) as HTMLElement[]));
-    }
-
-    if (answer) {
-      layout.push(...answer.map(answerRenderer));
-    }
-
-    if (footer) {
-      layout.push(footerRenderer(footer));
-    }
+  if (header) {
+    layout.push(headerRenderer(header));
   }
-  paper.append(...layout);
+
+  if (title) {
+    layout.push(titleRenderer(title));
+  }
+
+  if (description) {
+    layout.push(descriptionRenderer(description));
+  }
+
+  if (main) {
+    layout.push(...(main.map(matchRender).filter(Boolean) as HTMLElement[]));
+  }
+
+  if (answer) {
+    layout.push(...answer.map(answerRenderer));
+  }
+
+  if (footer) {
+    layout.push(footerRenderer(footer));
+  }
+
+  if (paper.header || paper.footer) {
+    paper.layout = layout;
+  } else {
+    paper.append(...layout);
+  }
+
   return {
     paper,
     mounted: (
       parent: HTMLElement | Document | ShadowRoot | string = document.body
     ) => {
-      applyElementDefaultStyles();
       domMountToParent(paper, parent);
     },
   };
