@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "exam-paper monorepo",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd packages/renderer && pnpm test"
   },
   "keywords": [],
   "author": "w-xuefeng",
