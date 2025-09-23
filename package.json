@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "description": "exam-paper monorepo",
   "scripts": {
-    "test": "cd packages/renderer && pnpm test"
+    "test:renderer": "cd packages/renderer && pnpm test",
+    "test:editor": "cd packages/editor && pnpm test"
   },
   "keywords": [],
   "author": "w-xuefeng",
   "license": "ISC",
   "type": "module",
-  "dependencies": {
-    "@exam-paper/structure": "workspace:^"
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "rimraf": "^6.0.1",
+    "rolldown": "1.0.0-beta.38",
+    "typescript": "^5.9.2"
   }
 }

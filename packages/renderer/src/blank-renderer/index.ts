@@ -14,7 +14,6 @@ export function blankRenderer(blank: BlankWrapper) {
   defineRenderer(ELEMENTS.BLANK, ExamPaperBlank);
   return styledContentRenderer(
     {
-      value: "",
       style: blank.style,
     },
     ELEMENTS.BLANK

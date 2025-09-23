@@ -1,4 +1,4 @@
-import { AnswerWrapper, type Answer } from "@exam-paper/structure";
+import type { AnswerWrapper, Answer } from "@exam-paper/structure";
 import { styledContentRenderer } from "../style-renderer";
 import { h } from "../shared/dom";
 import { ELEMENTS } from "../consts/elements";

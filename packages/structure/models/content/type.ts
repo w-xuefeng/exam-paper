@@ -6,15 +6,15 @@ import type { TypeWrapper } from "../shared/type";
  * styled content
  */
 export type StyledContentWrapper<T = string> = {
-  value: T;
-  style: StyleWrapper;
+  value?: T;
+  style?: StyleWrapper;
 };
 
 /**
  * layout
  */
 export type LayoutWrapper<T> = {
-  style: StyleWrapper;
+  style?: StyleWrapper;
   layout: T;
 };
 

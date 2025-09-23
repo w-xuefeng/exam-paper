@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "DOM.AsyncIterable",
+      "ESNext"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "declarationDir": "./lib",
+    "emitDeclarationOnly": true,
+  },
+  "include": [
+    "./index.ts",
+    "./models/**/*.ts"
+  ]
+}

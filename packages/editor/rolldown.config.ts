@@ -21,7 +21,7 @@ export default defineConfig([
         dir: "lib",
         format: "umd",
         inlineDynamicImports: true,
-        name: "ExamRenderer",
+        name: "ExamEditor",
         entryFileNames: "[name].umd.js",
         minify: true,
       },

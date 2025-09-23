@@ -128,10 +128,7 @@ export function paperRenderer(examPaper: ExamPaperWrapper) {
   } = examPaper;
 
   const paper = styledContentRenderer<ExamPaperPage>(
-    {
-      value: "",
-      style,
-    },
+    { style },
     ELEMENTS.PAPER,
     {
       header,

@@ -1,7 +1,7 @@
 {
-  "name": "@exam-paper/renderer",
+  "name": "@exam-paper/editor",
   "version": "0.0.0",
-  "description": "the renderer of exam-paper",
+  "description": "the editor of exam-paper",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",

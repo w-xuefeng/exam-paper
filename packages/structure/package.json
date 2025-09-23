@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "description": "the structured data of exam-paper",
   "main": "index.ts",
-  "scripts": {},
   "keywords": [],
   "author": "w-xuefeng",
   "type": "module",
-  "devDependencies": {
+  "dependencies": {
     "csstype": "^3.1.3"
   }
 }

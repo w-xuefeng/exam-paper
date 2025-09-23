@@ -504,7 +504,7 @@ export function removeDOM(dom: HTMLElement | Node | ShadowRoot) {
     dom.childNodes.forEach((e) => removeDOM(e));
     return;
   }
-  throw new Error("[DOMily] removeDOM is not supported in this environment");
+  throw new Error("removeDOM is not supported in this environment");
 }
 
 export function replaceDOM(
