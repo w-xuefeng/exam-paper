@@ -1,0 +1,43 @@
+.title-block-wrapper {
+  width: 100%;
+  outline: 1px solid #ddd;
+}
+
+.title-settings-panel {
+  width: 300px;
+}
+
+.settings-panel {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+  border: 1px solid #e9ecef;
+}
+
+.settings-panel h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
