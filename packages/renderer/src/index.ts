@@ -9,3 +9,4 @@ export * from "./footer-renderer";
 export * from "./paper-renderer";
 export * from "./exam-paper-renderer";
 export * from "./element-styles";
+export * as DOMUtils from "./shared/dom";

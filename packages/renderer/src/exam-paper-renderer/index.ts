@@ -72,7 +72,7 @@ export function examPaperRenderer(examPaper: ExamPaperWrapper) {
 
   return {
     paper,
-    mounted: (
+    mount: (
       parent: HTMLElement | Document | ShadowRoot | string = document.body
     ) => {
       domMountToParent(paper, parent);

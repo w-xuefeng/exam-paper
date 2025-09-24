@@ -1,24 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "DOM.AsyncIterable",
-      "ESNext"
-    ],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "types": [
-      "node"
-    ],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  },
-  "include": [
-    "src",
-    "test"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
