@@ -2,6 +2,7 @@ import type { TypeWrapper } from "@exam-paper/structure";
 
 export function unTypeWrapper<T, V>(wrapper: TypeWrapper<T, V> | V) {
   const { value } =
+    "type" in (wrapper as TypeWrapper<T, V>) &&
     "value" in (wrapper as TypeWrapper<T, V>)
       ? (wrapper as TypeWrapper<T, V>)
       : { value: wrapper as V };

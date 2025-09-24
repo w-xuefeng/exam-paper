@@ -9,10 +9,10 @@ import type {
 } from "../content/type";
 
 export interface NormalExam {
-  header?: HeaderWrapper["value"];
-  title?: TitleWrapper["value"];
-  description?: DescriptionWrapper["value"];
+  header?: HeaderWrapper | HeaderWrapper["value"];
+  title?: TitleWrapper | TitleWrapper["value"];
+  description?: DescriptionWrapper | DescriptionWrapper["value"];
   main: (BlankWrapper | TitleWrapper | DescriptionWrapper | QuestionWrapper)[];
-  answer?: AnswerWrapper["value"][];
-  footer?: FooterWrapper["value"];
+  answer?: (AnswerWrapper | AnswerWrapper["value"])[];
+  footer?: FooterWrapper | FooterWrapper["value"];
 }

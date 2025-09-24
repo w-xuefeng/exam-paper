@@ -12,16 +12,6 @@
     "position": "bottom-center"
   },
   "value": {
-    "style": {
-      "type": "css",
-      "value": {
-        "background": "#fff",
-        "padding": "20px",
-        "maxWidth": "800px",
-        "minWidth": "300px",
-        "margin": "auto"
-      }
-    },
     "layout": {
       "header": {
         "type": "header",

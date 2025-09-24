@@ -57,7 +57,7 @@ export function baseQuestionRenderer(
     ? styledContentRenderer(description)
     : null;
   const questionOptions = options?.map((op) => styledContentRenderer(op));
-  const questionAnswer = answer ? answerRenderer(answer.value) : null;
+  const questionAnswer = answer ? answerRenderer(answer) : null;
 
   const titleChildren = [
     questionOrderNumber,

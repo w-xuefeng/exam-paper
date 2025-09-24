@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "exam-paper monorepo",
   "scripts": {
-    "test:renderer": "cd packages/renderer && pnpm test",
-    "test:editor": "cd packages/editor && pnpm test"
+    "test:renderer": "pnpm --filter renderer test",
+    "dev:editor": "pnpm --filter editor dev"
   },
   "keywords": [],
   "author": "w-xuefeng",

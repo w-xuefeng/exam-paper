@@ -1,6 +1,6 @@
 import { styledContentRenderer } from "../style-renderer";
 import { ELEMENTS } from "../consts/elements";
-import { defineRenderer } from "../shared";
+import { defineRenderer, unTypeWrapper } from "../shared";
 import { h, parseAttribute } from "../shared/dom";
 import { applyElementDefaultStyles } from "../element-styles";
 import type {
@@ -114,13 +114,14 @@ export function paperRenderer(examPaper: ExamPaperWrapper) {
   const {
     paper: paperType,
     direction = "portrait",
-    pagination = {
-      style: {
-        fontSize: "12px",
-      },
-      formatter: "第 %current 页 / 共 %total 页",
-      position: "bottom-center",
-    },
+    // pagination = {
+    //   style: {
+    //     fontSize: "12px",
+    //   },
+    //   formatter: "第 %current 页 / 共 %total 页",
+    //   position: "bottom-center",
+    // },
+    pagination,
     value: {
       style,
       layout: { header, footer },
@@ -131,8 +132,8 @@ export function paperRenderer(examPaper: ExamPaperWrapper) {
     { style },
     ELEMENTS.PAPER,
     {
-      header,
-      footer,
+      header: unTypeWrapper(header),
+      footer: unTypeWrapper(footer),
       pagination,
       attrs: {
         paper: paperType,

@@ -18,7 +18,7 @@
 
 | 包 | 描述 |
 | :--- | :--- |
-| [`packages/editor`](./packages/editor/) | 一个基于 Vue.js 的富文本编辑器，用于创建和编辑考卷。 |
+| [`packages/editor`（WIP）](./packages/editor/) | 一个基于 Vue.js 的富文本编辑器，用于创建和编辑考卷。 |
 | [`packages/renderer`](./packages/renderer/) | 一个负责将考卷结构渲染成 HTML 和 CSS 的库。 |
 | [`packages/structure`](./packages/structure/) | 定义了整个应用程序的 TypeScript 类型和数据模型。 |
 
@@ -34,7 +34,7 @@
 
 ### 环境准备
 
-- [Node.js](https://nodejs.org/en/) (建议 v18 或更高版本)
+- [Node.js](https://nodejs.org/en/) (建议 v20 或更高版本)
 - [pnpm](https://pnpm.io/installation)
 
 ### 1. 克隆仓库
@@ -61,11 +61,3 @@ pnpm --filter editor dev
 ```
 
 这会启动考卷编辑器，通常可以在 `http://localhost:5173` 访问。
-
-### 4. 构建项目
-
-你可以从根目录或在每个包内运行构建命令来为生产环境构建包。例如，构建 `@exam-paper/renderer`：
-
-```bash
-pnpm --filter @exam-paper/renderer build
-```

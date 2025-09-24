@@ -18,7 +18,7 @@ This monorepo contains the following packages:
 
 | Package | Description |
 | :--- | :--- |
-| [`packages/editor`](./packages/editor/) | A Vue.js-based rich text editor for creating and editing exam papers. |
+| [`packages/editor`（WIP）](./packages/editor/) | A Vue.js-based rich text editor for creating and editing exam papers. |
 | [`packages/renderer`](./packages/renderer/) | A library responsible for rendering the exam paper structure into HTML and CSS. |
 | [`packages/structure`](./packages/structure/) | Defines the TypeScript types and data models for the entire application. |
 
@@ -61,11 +61,3 @@ pnpm --filter editor dev
 ```
 
 This will launch the exam paper editor, typically available at `http://localhost:5173`.
-
-### 4. Build the Project
-
-To build the packages for production, you can run the build command from the root or within each package. For example, to build the `@exam-paper/renderer`:
-
-```bash
-pnpm --filter @exam-paper/renderer build
-```

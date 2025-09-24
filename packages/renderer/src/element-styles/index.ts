@@ -29,6 +29,11 @@ export function elementDefaultStyles<Paper extends string>({
   return {
     [ELEMENTS.PAPER]: {
       display: "block",
+      background: "#ffffff",
+      padding: "20px",
+      maxWidth: "800px",
+      minWidth: "300px",
+      margin: "auto",
     },
     [ELEMENTS.QUESTION]: {
       display: "block",
