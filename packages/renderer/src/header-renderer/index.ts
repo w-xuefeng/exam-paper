@@ -22,7 +22,6 @@ export function headerRenderer(
     return styledContentRenderer<ExamPaperHeader>(
       {
         style: header.style,
-        value: "",
       },
       ELEMENTS.HEADER,
       {

@@ -114,13 +114,6 @@ export function paperRenderer(examPaper: ExamPaperWrapper) {
   const {
     paper: paperType,
     direction = "portrait",
-    // pagination = {
-    //   style: {
-    //     fontSize: "12px",
-    //   },
-    //   formatter: "第 %current 页 / 共 %total 页",
-    //   position: "bottom-center",
-    // },
     pagination,
     value: {
       style,

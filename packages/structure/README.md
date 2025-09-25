@@ -1,4 +1,3 @@
-README.md
 # @exam-paper/structure
 
 This package defines the core data structures for the entire exam paper application. It uses TypeScript to create robust and type-safe models for papers, questions, answers, and more.
@@ -33,17 +32,14 @@ The data models are organized into the following directories:
 `ExamPaperWrapper` 是试卷结构的核心类型，它包装了整个试卷的所有内容。
 
 ```ts
-interface ExamPaperWrapper<
-  Paper extends string = BuiltInPaperNameUnionTypes
-> extends TypeWrapper<StructuralType.PAPER, LayoutWrapper<NormalExam>>,
-    PaperOption<Paper> {}
+interface ExamPaperWrapper<Paper extends string = BuiltInPaperNameUnionTypes> extends TypeWrapper<StructuralType.PAPER, LayoutWrapper<NormalExam>>, PaperOption<Paper> {}
 ```
 
 ### 试卷结构示例
 
 #### 最小示例（仅包含必需属性）：
 
-```json
+```json5
 {
   "type": "paper",
   "paper": "A4",

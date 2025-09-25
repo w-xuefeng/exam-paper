@@ -22,7 +22,6 @@ export function footerRenderer(
     return styledContentRenderer<ExamPaperFooter>(
       {
         style: footer.style,
-        value: "",
       },
       ELEMENTS.FOOTER,
       {
