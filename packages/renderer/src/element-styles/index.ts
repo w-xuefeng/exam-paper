@@ -1,6 +1,8 @@
-import type {
-  CSSNestedObjectProperties,
-  PaperOption,
+import {
+  paperSizeMap,
+  type BuiltInPaperNameUnionTypes,
+  type CSSNestedObjectProperties,
+  type PaperOption,
 } from "@exam-paper/structure";
 import { ELEMENTS } from "../consts/elements";
 import {
@@ -8,6 +10,32 @@ import {
   handleCSSToStyleElement,
   removeDOM,
 } from "../shared/dom";
+
+export function getPaperSizeStyle(
+  tagName: string
+): Record<string, CSSNestedObjectProperties> {
+  return Object.keys(paperSizeMap)
+    .map((size) => ({
+      [`${tagName}[paper="${size}"][direction="portrait"]`]: {
+        width: `${
+          paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
+        }mm`,
+        height: `${
+          paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm
+        }mm`,
+      },
+      [`${tagName}[paper="${size}"][direction="landscape"]`]: {
+        width: `${paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm}mm`,
+        height: `${
+          paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
+        }mm`,
+      },
+    }))
+    .reduce(
+      (t, cv) => Object.assign(t, cv),
+      {} as Record<string, CSSNestedObjectProperties>
+    );
+}
 
 export function elementDefaultStyles<Paper extends string>({
   paper,
@@ -29,12 +57,12 @@ export function elementDefaultStyles<Paper extends string>({
   return {
     [ELEMENTS.PAPER]: {
       display: "block",
+      boxSizing: "border-box",
       background: "#ffffff",
       padding: "20px",
-      maxWidth: "800px",
-      minWidth: "300px",
       margin: "auto",
     },
+    ...getPaperSizeStyle(ELEMENTS.PAPER),
     [ELEMENTS.QUESTION]: {
       display: "block",
     },

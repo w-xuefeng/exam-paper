@@ -17,12 +17,13 @@ const editor = shallowRef<EditorJS>()
 onMounted(() => {
   editor.value = new EditorJS({
     holder: 'exam-rich-editor',
+    autofocus: true,
     tools: {
       style: StyleInlineTool,
       title: TitleTool,
       colorPicker: ColorPicker,
       mathLaTex: MathLatexInlineTool
-    }
+    },
   });
 })
 
@@ -30,12 +31,11 @@ onMounted(() => {
 
 <style scoped lang="less">
 #exam-rich-editor {
-  width: calc(50vw - var(--editor-gap) / 2);
+  width: 100%;
   background-color: #fff;
   max-width: var(--editor-width-px);
   min-width: 600px;
   min-height: 400px;
-  border-radius: 12px;
   padding: 20px;
   box-sizing: border-box;
   box-shadow: 0 -3px 29px -5px rgba(34, 39, 47, .14);
