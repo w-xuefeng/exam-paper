@@ -1,7 +1,7 @@
 import { styledContentRenderer } from "../style-renderer";
 import { ELEMENTS } from "../consts/elements";
 import { defineRenderer } from "../shared";
-import { h, parseAttribute } from "../shared/dom";
+import { parseAttribute } from "../shared/dom";
 import { applyElementDefaultStyles } from "../element-styles";
 import type {
   BuiltInPaperNameUnionTypes,
@@ -11,8 +11,6 @@ import type {
   PaperDirection,
   PaperOption,
 } from "@exam-paper/structure";
-// import { headerRenderer } from "../header-renderer";
-// import { footerRenderer } from "../footer-renderer";
 import { ExamPaperPage } from "../page-render";
 
 class ExamPaperContainer extends HTMLElement {
