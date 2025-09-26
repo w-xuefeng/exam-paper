@@ -373,27 +373,195 @@
                     },
                     "value": {
                       "type": "object",
-                      "description": "内容值和样式",
+                      "description": "问题内容值和样式",
                       "properties": {
-                        "value": {
+                        "type": {
                           "type": "string",
-                          "description": "内容值"
+                          "description": "问题类型",
+                          "enum": [
+                            "single-choice",
+                            "multiple-choice",
+                            "true-false",
+                            "fill-in-the-blank",
+                            "short-answer",
+                            "calculation",
+                            "matching",
+                            "ordering",
+                            "cloze-test",
+                            "comprehension",
+                            "essay",
+                            "ancient-poetry-appreciation",
+                            "classical-chinese-reading",
+                            "modern-text-reading",
+                            "sentence-mending",
+                            "language-expression",
+                            "quotes-recitation",
+                            "proof",
+                            "application",
+                            "inquiry",
+                            "listening-comprehension",
+                            "grammar-fill-in",
+                            "error-correction",
+                            "translation",
+                            "situational-dialogue",
+                            "experimental-design",
+                            "experimental-operation",
+                            "circuit-design",
+                            "chemical-equation",
+                            "substance-inference",
+                            "genetic-diagram",
+                            "chart-reading",
+                            "material-analysis",
+                            "case-analysis",
+                            "discrimination",
+                            "commentary",
+                            "map-reading",
+                            "regional-analysis",
+                            "other"
+                          ]
                         },
-                        "style": {
+                        "orderNumber": {
+                          "type": "string",
+                          "description": "题号"
+                        },
+                        "title": {
                           "type": "object",
-                          "description": "样式设置",
+                          "description": "问题标题",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "description": "标题内容值"
+                            },
+                            "style": {
+                              "type": "object",
+                              "description": "标题样式设置",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "inline",
+                                    "css"
+                                  ],
+                                  "description": "样式类型"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "description": "样式对象"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "description": {
+                          "type": "object",
+                          "description": "问题描述",
+                          "properties": {
+                            "value": {
+                              "type": "string",
+                              "description": "问题描述内容值"
+                            },
+                            "style": {
+                              "type": "object",
+                              "description": "问题描述样式设置",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "inline",
+                                    "css"
+                                  ],
+                                  "description": "样式类型"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "description": "样式对象"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "description": "问题选项",
+                            "properties": {
+                              "value": {
+                                "type": "string",
+                                "description": "问题选项内容值"
+                              },
+                              "style": {
+                                "type": "object",
+                                "description": "问题选项样式设置",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "inline",
+                                      "css"
+                                    ],
+                                    "description": "样式类型"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "description": "样式对象"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "score": {
+                          "type": "object",
+                          "description": "问题分值",
+                          "properties": {
+                            "formatter": {
+                              "type": "string",
+                              "description": "分值格式化模版"
+                            },
+                            "value": {
+                              "type": "number",
+                              "description": "分值"
+                            }
+                          }
+                        },
+                        "answer": {
+                          "type": "object",
+                          "description": "问题答案",
                           "properties": {
                             "type": {
                               "type": "string",
-                              "enum": [
-                                "inline",
-                                "css"
-                              ],
-                              "description": "样式类型"
+                              "const": "answer",
+                              "description": "类型，固定为 'answer'"
                             },
                             "value": {
                               "type": "object",
-                              "description": "样式对象"
+                              "description": "内容值和样式",
+                              "properties": {
+                                "value": {
+                                  "type": "string",
+                                  "description": "内容值"
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "description": "样式设置",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "inline",
+                                        "css"
+                                      ],
+                                      "description": "样式类型"
+                                    },
+                                    "value": {
+                                      "type": "object",
+                                      "description": "样式对象"
+                                    }
+                                  }
+                                }
+                              },
+                              "additionalProperties": false
                             }
                           }
                         }
@@ -403,7 +571,7 @@
                   },
                   "required": [
                     "type",
-                    "value"
+                    "title"
                   ],
                   "additionalProperties": false
                 },
