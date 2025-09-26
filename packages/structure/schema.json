@@ -566,12 +566,16 @@
                           }
                         }
                       },
+                      "required": [
+                        "type",
+                        "title"
+                      ],
                       "additionalProperties": false
                     }
                   },
                   "required": [
                     "type",
-                    "title"
+                    "value"
                   ],
                   "additionalProperties": false
                 },
