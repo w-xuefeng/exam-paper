@@ -4,6 +4,11 @@
   "description": "试卷结构定义",
   "type": "object",
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "指向用于验证此 JSON 文档的 JSON Schema的URI",
+      "format": "uri"
+    },
     "type": {
       "type": "string",
       "const": "paper",
