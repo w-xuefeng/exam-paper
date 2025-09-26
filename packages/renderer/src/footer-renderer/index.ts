@@ -24,6 +24,7 @@ export function footerRenderer(
 export function footersRenderer(
   footerWrapper: (FooterWrapper | FooterWrapper["value"])[]
 ) {
+  if (!footerWrapper.length) return null;
   defineRenderer(ELEMENTS.FOOTER, ExamPaperFooter);
   return h<ExamPaperFooter>(
     ELEMENTS.FOOTER,

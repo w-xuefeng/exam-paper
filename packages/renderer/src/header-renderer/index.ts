@@ -24,6 +24,7 @@ export function headerRenderer(
 export function headersRenderer(
   headerWrapper: (HeaderWrapper | HeaderWrapper["value"])[]
 ) {
+  if (!headerWrapper.length) return null;
   defineRenderer(ELEMENTS.HEADER, ExamPaperHeader);
   return h<ExamPaperHeader>(
     ELEMENTS.HEADER,

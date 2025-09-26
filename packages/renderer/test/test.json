@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/w-xuefeng/exam-paper/refs/heads/main/packages/structure/schema.json",
+  "$schema": "https://cdn.jsdelivr.net/npm/@exam-paper/structure/schema.json",
   "type": "paper",
   "option": {
     "paper": "A4",

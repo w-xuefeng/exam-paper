@@ -155,6 +155,6 @@ export function pageRenderer(
       headersRenderer(headers),
       ...layout.map(matchRender),
       footersRenderer(footers),
-    ] as HTMLElement[]
+    ].filter(Boolean) as HTMLElement[]
   );
 }
