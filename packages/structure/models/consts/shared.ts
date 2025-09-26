@@ -5,6 +5,11 @@ export const STRUCTURAL_TYPE = {
    */
   PAPER: "paper",
   /**
+   * page
+   * 页面
+   */
+  PAGE: "page",
+  /**
    * question
    * 题目
    */
@@ -47,6 +52,11 @@ export namespace StructuralType {
    * 纸张
    */
   export type PAPER = typeof STRUCTURAL_TYPE.PAPER;
+  /**
+   * page
+   * 页面
+   */
+  export type PAGE = typeof STRUCTURAL_TYPE.PAGE;
   /**
    * question
    * 题目

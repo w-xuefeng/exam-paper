@@ -1,0 +1,513 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExamPaperWrapper",
+  "description": "试卷结构定义",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "paper",
+      "description": "结构类型，固定为 'paper'"
+    },
+    "option": {
+      "type": "object",
+      "description": "试卷选项",
+      "properties": {
+        "paper": {
+          "type": "string",
+          "enum": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "A6",
+            "B1",
+            "B2",
+            "B3",
+            "B4",
+            "B5"
+          ],
+          "description": "纸张类型"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "portrait",
+            "landscape"
+          ],
+          "description": "纸张方向"
+        },
+        "pagination": {
+          "type": "object",
+          "description": "分页设置",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "inner",
+                "outer"
+              ],
+              "description": "页码类型，outer 仅打印时显示"
+            },
+            "style": {
+              "type": "object",
+              "description": "CSS样式属性"
+            },
+            "formatter": {
+              "type": "string",
+              "description": "页码格式化器，例如 '第' %current '页 / 共' %total '页'"
+            },
+            "position": {
+              "type": "string",
+              "enum": [
+                "top-left",
+                "top-right",
+                "bottom-left",
+                "bottom-right",
+                "top-center",
+                "bottom-center"
+              ],
+              "description": "页码位置"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "paper"
+      ],
+      "additionalProperties": false
+    },
+    "style": {
+      "type": "object",
+      "description": "样式设置",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "css"
+          ],
+          "description": "样式类型"
+        },
+        "value": {
+          "type": "object",
+          "description": "样式对象"
+        }
+      }
+    },
+    "header": {
+      "type": "object",
+      "description": "全局页眉内容值和样式",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "全局页眉内容"
+        },
+        "style": {
+          "type": "object",
+          "description": "样式设置",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "inline",
+                "css"
+              ],
+              "description": "样式类型"
+            },
+            "value": {
+              "type": "object",
+              "description": "样式对象"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "footer": {
+      "type": "object",
+      "description": "全局页脚内容值和样式",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "全局页脚内容"
+        },
+        "style": {
+          "type": "object",
+          "description": "样式设置",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "inline",
+                "css"
+              ],
+              "description": "样式类型"
+            },
+            "value": {
+              "type": "object",
+              "description": "样式对象"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pages": {
+      "type": "array",
+      "description": "页面列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "page",
+            "description": "类型，固定为 'page'"
+          },
+          "style": {
+            "type": "object",
+            "description": "样式设置",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "inline",
+                  "css"
+                ],
+                "description": "样式类型"
+              },
+              "value": {
+                "type": "object",
+                "description": "样式对象"
+              }
+            }
+          },
+          "layout": {
+            "type": "array",
+            "description": "页面布局元素",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "description": "页眉",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "header",
+                      "description": "类型，固定为 'header'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "标题",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "title",
+                      "description": "类型，固定为 'title'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "描述",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "description",
+                      "description": "类型，固定为 'description'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "空白",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "blank",
+                      "description": "类型，固定为 'blank'"
+                    },
+                    "style": {
+                      "type": "object",
+                      "description": "样式设置",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "inline",
+                            "css"
+                          ],
+                          "description": "样式类型"
+                        },
+                        "value": {
+                          "type": "object",
+                          "description": "样式对象"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "问题",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "question",
+                      "description": "类型，固定为 'question'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "答案",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "answer",
+                      "description": "类型，固定为 'answer'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "description": "页脚",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "footer",
+                      "description": "类型，固定为 'footer'"
+                    },
+                    "value": {
+                      "type": "object",
+                      "description": "内容值和样式",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "内容值"
+                        },
+                        "style": {
+                          "type": "object",
+                          "description": "样式设置",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "inline",
+                                "css"
+                              ],
+                              "description": "样式类型"
+                            },
+                            "value": {
+                              "type": "object",
+                              "description": "样式对象"
+                            }
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "layout"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "type",
+    "option",
+    "pages"
+  ],
+  "additionalProperties": false
+}

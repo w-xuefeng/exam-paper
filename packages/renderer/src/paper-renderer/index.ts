@@ -1,6 +1,6 @@
 import { styledContentRenderer } from "../style-renderer";
 import { ELEMENTS } from "../consts/elements";
-import { defineRenderer, unTypeWrapper } from "../shared";
+import { defineRenderer } from "../shared";
 import { h, parseAttribute } from "../shared/dom";
 import { applyElementDefaultStyles } from "../element-styles";
 import type {
@@ -11,10 +11,11 @@ import type {
   PaperDirection,
   PaperOption,
 } from "@exam-paper/structure";
-import { headerRenderer } from "../header-renderer";
-import { footerRenderer } from "../footer-renderer";
+// import { headerRenderer } from "../header-renderer";
+// import { footerRenderer } from "../footer-renderer";
+import { ExamPaperPage } from "../page-render";
 
-class ExamPaperPage extends HTMLElement {
+class ExamPaperContainer extends HTMLElement {
   /**
    * the paper size type
    * [BuiltInPaperNameUnionTypes](../../../structure/models/papers/type.ts)
@@ -44,18 +45,9 @@ class ExamPaperPage extends HTMLElement {
   footer?: FooterWrapper["value"];
 
   /**
-   * if header and footer are enabled, use table layout
+   * the pages of paper
    */
-  table: HTMLTableElement | null = null;
-
-  /**
-   * the main container of table layout   */
-  tableMainContainer: HTMLTableColElement | null = null;
-
-  /**
-   * the layout of paper
-   */
-  layout: HTMLElement[] = [];
+  pages: ExamPaperPage[] = [];
 
   constructor() {
     super();
@@ -76,57 +68,25 @@ class ExamPaperPage extends HTMLElement {
       pagination: this.pagination,
     };
     applyElementDefaultStyles(paperOption, this);
-
-    if (this.header || this.footer) {
-      this.tableMainContainer = h<HTMLTableColElement>("td", null, this.layout);
-      this.table = h<HTMLTableElement>(
-        "table",
-        {
-          className: "exam-paper-table-layout",
-        },
-        [
-          this.header
-            ? h("thead", null, [
-                h("tr", null, [
-                  h("td", null, headerRenderer(this.header, true)),
-                ]),
-              ])
-            : null,
-          h("tbody", null, [h("tr", null, this.tableMainContainer)]),
-          this.footer
-            ? h("tfoot", null, [
-                h("tr", null, [
-                  h("td", null, footerRenderer(this.footer, true)),
-                ]),
-              ])
-            : null,
-        ].filter(Boolean) as HTMLElement[]
-      );
-      this.appendChild(this.table);
-    } else {
-      this.append(...this.layout);
-    }
+    this.append(...this.pages);
   }
 }
 
 export function paperRenderer(examPaper: ExamPaperWrapper) {
-  defineRenderer(ELEMENTS.PAPER, ExamPaperPage);
+  defineRenderer(ELEMENTS.PAPER, ExamPaperContainer);
   const {
-    paper: paperType,
-    direction = "portrait",
-    pagination,
-    value: {
-      style,
-      layout: { header, footer },
-    },
+    option: { paper: paperType, direction = "portrait", pagination },
+    style,
+    header,
+    footer,
   } = examPaper;
 
-  const paper = styledContentRenderer<ExamPaperPage>(
+  const paper = styledContentRenderer<ExamPaperContainer>(
     { style },
     ELEMENTS.PAPER,
     {
-      header: unTypeWrapper(header),
-      footer: unTypeWrapper(footer),
+      header,
+      footer,
       pagination,
       attrs: {
         paper: paperType,

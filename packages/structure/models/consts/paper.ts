@@ -17,6 +17,11 @@ export const PAPER_DIRECTION = {
   LANDSCAPE: "landscape",
 } as const;
 
+export const PAGINATION_TYPE = {
+  INNER: "inner",
+  OUTER: "outer",
+} as const;
+
 export namespace BuiltInPaperName {
   export type A1 = (typeof BUILTIN_PAPER_NAME)[0];
   export type A2 = (typeof BUILTIN_PAPER_NAME)[1];

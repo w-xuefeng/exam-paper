@@ -1,9 +1,17 @@
-import { BUILTIN_PAPER_NAME } from "../consts/paper";
+import {
+  BUILTIN_PAPER_NAME,
+  PAGINATION_TYPE,
+  PAPER_DIRECTION,
+} from "../consts/paper";
 import { CSSProperties } from "../styles";
 
 export type BuiltInPaperNameUnionTypes = (typeof BUILTIN_PAPER_NAME)[number];
 
-export type PaperDirection = "portrait" | "landscape";
+export type PaperDirection =
+  (typeof PAPER_DIRECTION)[keyof typeof PAPER_DIRECTION];
+
+export type PaginationType =
+  (typeof PAGINATION_TYPE)[keyof typeof PAGINATION_TYPE];
 
 export interface PaperSize<T extends string = BuiltInPaperNameUnionTypes> {
   name: T;
@@ -16,6 +24,7 @@ export interface PaperOption<T extends string = BuiltInPaperNameUnionTypes> {
   paper: T;
   direction?: PaperDirection;
   pagination?: {
+    type?: PaginationType;
     style?: CSSProperties;
     /**
      * the formatter of the pagination

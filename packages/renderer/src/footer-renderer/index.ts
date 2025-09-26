@@ -12,28 +12,24 @@ class ExamPaperFooter extends HTMLElement {
 }
 
 export function footerRenderer(
-  footerWrapper: FooterWrapper | FooterWrapper["value"],
-  isPlaceholder = false
+  footerWrapper: FooterWrapper | FooterWrapper["value"]
 ) {
   defineRenderer(ELEMENTS.FOOTER, ExamPaperFooter);
   const footer = unTypeWrapper(footerWrapper);
-
-  if (isPlaceholder) {
-    return styledContentRenderer<ExamPaperFooter>(
-      {
-        style: footer.style,
-      },
-      ELEMENTS.FOOTER,
-      {
-        className: "footer-placeholder",
-      }
-    );
-  }
-
   return h<HTMLElement>("footer", null, [
     styledContentRenderer<ExamPaperFooter>(footer, ELEMENTS.FOOTER),
-    styledContentRenderer<ExamPaperFooter>(footer, ELEMENTS.FOOTER, {
-      className: "print-footer",
-    }),
   ]);
+}
+
+export function footersRenderer(
+  footerWrapper: (FooterWrapper | FooterWrapper["value"])[]
+) {
+  defineRenderer(ELEMENTS.FOOTER, ExamPaperFooter);
+  return h<ExamPaperFooter>(
+    ELEMENTS.FOOTER,
+    null,
+    footerWrapper.map((e) => {
+      return styledContentRenderer<ExamPaperFooter>(unTypeWrapper(e), "footer");
+    })
+  );
 }

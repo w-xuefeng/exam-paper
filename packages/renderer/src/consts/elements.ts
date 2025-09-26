@@ -10,6 +10,11 @@ export const ELEMENTS = {
    */
   PAPER: elName("container"),
   /**
+   * page
+   * 页面
+   */
+  PAGE: elName("page"),
+  /**
    * question
    * 题目
    */

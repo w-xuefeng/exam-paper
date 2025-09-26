@@ -19,6 +19,13 @@ export type LayoutWrapper<T> = {
 };
 
 /**
+ * the page of the exam paper
+ */
+export type PageWrapper<T> = LayoutWrapper<T> & {
+  type: StructuralType.PAGE;
+};
+
+/**
  * the BLANK of the exam paper
  */
 export type BlankWrapper = {

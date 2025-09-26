@@ -410,10 +410,7 @@ export function h<T = HTMLElement | SVGElement>(
 }
 
 export function handleCSSToStyleElement(
-  css?:
-    | string
-    | CSSNestedObjectProperties
-    | Record<string, CSSNestedObjectProperties>
+  css?: string | CSSProperties | CSSNestedObjectProperties
 ): HTMLStyleElement | null {
   if (!css) {
     return null;
@@ -432,8 +429,8 @@ export function handleCSSToStyleElement(
     properties:
       | string
       | number
+      | CSSProperties
       | CSSNestedObjectProperties
-      | Record<string, CSSNestedObjectProperties>
       | undefined
   ) {
     let cssString = "";
@@ -459,9 +456,7 @@ export function handleCSSToStyleElement(
   }
 
   function jsonToCSS(
-    cssRecord:
-      | CSSNestedObjectProperties
-      | Record<string, CSSNestedObjectProperties>
+    cssRecord: CSSProperties | CSSNestedObjectProperties
   ): string {
     let cssString = "";
     for (const [selector, properties] of Object.entries(cssRecord)) {

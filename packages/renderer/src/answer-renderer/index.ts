@@ -17,8 +17,8 @@ export function answerRenderer(answerWrapper: Answer | AnswerWrapper) {
   const answer = unTypeWrapper(answerWrapper);
 
   if (typeof answer === "string") {
-    return h<HTMLElement>(ELEMENTS.ANSWER, { innerHTML: answer });
+    return h<ExamPaperAnswer>(ELEMENTS.ANSWER, { innerHTML: answer });
   }
 
-  return styledContentRenderer(answer, ELEMENTS.ANSWER);
+  return styledContentRenderer<ExamPaperAnswer>(answer, ELEMENTS.ANSWER);
 }

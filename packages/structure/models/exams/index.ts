@@ -5,16 +5,13 @@ import type {
   DescriptionWrapper,
   FooterWrapper,
   HeaderWrapper,
+  PageWrapper,
   TitleWrapper,
-  LayoutWrapper,
 } from "../content/type";
 
 import type { BuiltInPaperNameUnionTypes, PaperOption } from "../papers";
 import type { QuestionWrapper } from "../questions";
-import type { TypeWrapper } from "../shared/type";
-
-import type { NormalExam } from "./normal-exam";
-export type { NormalExam } from "./normal-exam";
+import type { StyleWrapper } from "../styles";
 
 export type ExamWidget =
   | HeaderWrapper
@@ -27,5 +24,11 @@ export type ExamWidget =
 
 export interface ExamPaperWrapper<
   Paper extends string = BuiltInPaperNameUnionTypes
-> extends TypeWrapper<StructuralType.PAPER, LayoutWrapper<NormalExam>>,
-    PaperOption<Paper> {}
+> {
+  type: StructuralType.PAPER;
+  option: PaperOption<Paper>;
+  style?: StyleWrapper;
+  header?: HeaderWrapper["value"];
+  footer?: FooterWrapper["value"];
+  pages: PageWrapper<ExamWidget[]>[];
+}

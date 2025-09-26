@@ -3,6 +3,7 @@ import {
   type StyleCSSWrapper,
   type StyleInlineWrapper,
   type StyledContentWrapper,
+  type CSSNestedObjectProperties,
 } from "@exam-paper/structure";
 import {
   handleCSSToStyleElement,
@@ -15,6 +16,7 @@ import {
   ELEMENTS,
   type BuiltInElementNameUnionTypes,
 } from "../consts/elements";
+import { matchRender } from "../shared/renderer";
 
 class ExamPaperStyledContent extends HTMLElement {
   constructor() {
@@ -24,63 +26,103 @@ class ExamPaperStyledContent extends HTMLElement {
 }
 
 function handleInlineWrapper<T = HTMLElement>(
-  styledContent: {
-    value: string;
-    style: StyleInlineWrapper["value"];
-  },
-  elementName: BuiltInElementNameUnionTypes,
-  properties?: HTMLOrSVGElementProperties<T>
+  style: StyleInlineWrapper["value"],
+  elementName: keyof HTMLElementTagNameMap | BuiltInElementNameUnionTypes,
+  properties?: HTMLOrSVGElementProperties<T>,
+  children?: (HTMLElement | Node | string)[] | string | HTMLElement | Node
 ) {
-  return h<HTMLElement>(elementName, {
-    ...properties,
-    innerHTML: styledContent.value,
-    style: styledContent.style,
-  }) as T;
+  return h<HTMLElement>(
+    elementName,
+    {
+      ...properties,
+      style,
+    },
+    children
+  ) as T;
 }
 
 function handleCSSWrapper<T = HTMLElement>(
-  styledContent: {
-    value: string;
-    style: StyleCSSWrapper["value"];
-  },
-  elementName: BuiltInElementNameUnionTypes,
-  properties?: HTMLOrSVGElementProperties<T>
+  style: StyleCSSWrapper["value"],
+  elementName: keyof HTMLElementTagNameMap | BuiltInElementNameUnionTypes,
+  properties?: HTMLOrSVGElementProperties<T>,
+  children?:
+    | (HTMLElement | Element | Node | string)[]
+    | string
+    | Element
+    | HTMLElement
+    | Node
 ) {
   const uniqueIdentifier = `${elementName}-${crypto.randomUUID()}`;
   const styleElement = handleCSSToStyleElement({
-    [`.${uniqueIdentifier}`]: styledContent.style,
-  });
+    [`.${uniqueIdentifier}`]: style,
+  } as CSSNestedObjectProperties);
   const el = h<HTMLElement>(elementName, properties);
   addClass(el, uniqueIdentifier);
   if (styleElement) {
-    el.append(styleElement);
+    el.insertBefore(styleElement, el.firstChild);
   }
-  if (styledContent.value) {
-    el.append(
-      h<HTMLElement>("main", {
-        innerHTML: styledContent.value,
-      })
-    );
+  if (children) {
+    el.append(...(Array.isArray(children) ? children : [children]));
   }
   return el as T;
 }
 
+function handleValue(value: any) {
+  if (typeof value === "string") {
+    return value;
+  }
+  const _handleValue = (widget: any) => {
+    if (
+      typeof widget === "object" &&
+      widget !== null &&
+      "type" in widget &&
+      "value" in widget
+    ) {
+      return matchRender(widget);
+    }
+    const richText = String(widget ?? "");
+    return richText ? h<HTMLElement>("span", { innerHTML: richText }) : null;
+  };
+  return Array.isArray(value)
+    ? value.map((item) => _handleValue(item)).filter(Boolean)
+    : _handleValue(value);
+}
+
 export function styledContentRenderer<T = HTMLElement>(
   styledContent?: StyledContentWrapper<any>,
-  elementName: BuiltInElementNameUnionTypes = ELEMENTS.STYLED,
-  properties?: HTMLOrSVGElementProperties<T>
+  elementName:
+    | keyof HTMLElementTagNameMap
+    | BuiltInElementNameUnionTypes = ELEMENTS.STYLED,
+  properties?: HTMLOrSVGElementProperties<T>,
+  children?: (HTMLElement | Node | string)[] | string | HTMLElement | Node
 ) {
   defineRenderer(ELEMENTS.STYLED, ExamPaperStyledContent);
 
-  const { value, style } = styledContent || {};
+  const _properties: HTMLOrSVGElementProperties<HTMLElement> = {
+    ...properties,
+  };
 
-  const contentValue = String(value ?? "");
+  let _children: (string | HTMLElement | Node | undefined | null)[] = [
+    ...(Array.isArray(children) ? children : [children]),
+  ];
+
+  const { value, style } = styledContent || {};
+  const contentValue = handleValue(value);
+
+  if (typeof contentValue === "string") {
+    _properties.innerHTML = contentValue;
+  } else if (Array.isArray(contentValue)) {
+    _children = [...contentValue, ..._children];
+  }
+
+  const _childNodes = _children.filter(Boolean) as (
+    | HTMLElement
+    | Node
+    | string
+  )[];
 
   if (!style) {
-    return h<HTMLElement>(elementName, {
-      ...properties,
-      innerHTML: contentValue,
-    }) as T;
+    return h<HTMLElement>(elementName, _properties, _childNodes) as T;
   }
 
   const { type, value: styleValue } = style;
@@ -88,26 +130,19 @@ export function styledContentRenderer<T = HTMLElement>(
   switch (type) {
     case STYLE_TYPE.INLINE:
       return handleInlineWrapper<T>(
-        {
-          value: contentValue,
-          style: styleValue,
-        },
+        styleValue,
         elementName,
-        properties
+        _properties as HTMLOrSVGElementProperties<T>,
+        _childNodes
       );
     case STYLE_TYPE.CSS:
       return handleCSSWrapper<T>(
-        {
-          value: contentValue,
-          style: styleValue,
-        },
+        styleValue,
         elementName,
-        properties
+        _properties as HTMLOrSVGElementProperties<T>,
+        _childNodes
       );
     default:
-      return h<HTMLElement>(elementName, {
-        ...properties,
-        innerHTML: contentValue,
-      }) as T;
+      return h<HTMLElement>(elementName, _properties, _childNodes) as T;
   }
 }

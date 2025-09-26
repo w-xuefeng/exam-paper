@@ -12,28 +12,24 @@ class ExamPaperHeader extends HTMLElement {
 }
 
 export function headerRenderer(
-  headerWrapper: HeaderWrapper | HeaderWrapper["value"],
-  isPlaceholder = false
+  headerWrapper: HeaderWrapper | HeaderWrapper["value"]
 ) {
   defineRenderer(ELEMENTS.HEADER, ExamPaperHeader);
   const header = unTypeWrapper(headerWrapper);
-
-  if (isPlaceholder) {
-    return styledContentRenderer<ExamPaperHeader>(
-      {
-        style: header.style,
-      },
-      ELEMENTS.HEADER,
-      {
-        className: "header-placeholder",
-      }
-    );
-  }
-
   return h<HTMLElement>("header", null, [
     styledContentRenderer<ExamPaperHeader>(header, ELEMENTS.HEADER),
-    styledContentRenderer<ExamPaperHeader>(header, ELEMENTS.HEADER, {
-      className: "print-header",
-    }),
   ]);
+}
+
+export function headersRenderer(
+  headerWrapper: (HeaderWrapper | HeaderWrapper["value"])[]
+) {
+  defineRenderer(ELEMENTS.HEADER, ExamPaperHeader);
+  return h<ExamPaperHeader>(
+    ELEMENTS.HEADER,
+    null,
+    headerWrapper.map((e) => {
+      return styledContentRenderer<ExamPaperHeader>(unTypeWrapper(e), "header");
+    })
+  );
 }

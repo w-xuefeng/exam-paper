@@ -1,4 +1,5 @@
 import {
+  PAGINATION_TYPE,
   paperSizeMap,
   type BuiltInPaperNameUnionTypes,
   type CSSNestedObjectProperties,
@@ -12,11 +13,12 @@ import {
 } from "../shared/dom";
 
 export function getPaperSizeStyle(
-  tagName: string
+  paperName: string,
+  pageName: string
 ): Record<string, CSSNestedObjectProperties> {
   return Object.keys(paperSizeMap)
     .map((size) => ({
-      [`${tagName}[paper="${size}"][direction="portrait"]`]: {
+      [`${paperName}[paper="${size}"][direction="portrait"] ${pageName}`]: {
         width: `${
           paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
         }mm`,
@@ -24,7 +26,7 @@ export function getPaperSizeStyle(
           paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm
         }mm`,
       },
-      [`${tagName}[paper="${size}"][direction="landscape"]`]: {
+      [`${paperName}[paper="${size}"][direction="landscape"] ${pageName}`]: {
         width: `${paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm}mm`,
         height: `${
           paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
@@ -43,26 +45,36 @@ export function elementDefaultStyles<Paper extends string>({
   pagination,
 }: PaperOption<Paper>): CSSNestedObjectProperties {
   const size = `${paper} ${direction}`;
-  const paginationPrintConfig = pagination?.position
-    ? {
-        [`@${pagination.position}`]: {
-          content: pagination.formatter
-            ?.replace("%current", "counter(page)")
-            .replace("%total", "counter(pages)"),
-          ...(pagination.style ? pagination.style : {}),
-        },
-      }
-    : {};
+  const paginationPrintConfig =
+    pagination?.type === PAGINATION_TYPE.OUTER && pagination?.position
+      ? {
+          [`@${pagination.position}`]: {
+            content: pagination.formatter
+              ?.replace("%current", "counter(page)")
+              .replace("%total", "counter(pages)"),
+            ...(pagination.style ? pagination.style : {}),
+          },
+        }
+      : {};
 
   return {
     [ELEMENTS.PAPER]: {
       display: "block",
       boxSizing: "border-box",
+    },
+    [ELEMENTS.PAGE]: {
+      position: "relative",
+      display: "block",
+      boxSizing: "border-box",
       background: "#ffffff",
       padding: "20px",
       margin: "auto",
+      transform: "translateZ(0)",
     },
-    ...getPaperSizeStyle(ELEMENTS.PAPER),
+    [`${[ELEMENTS.PAGE]} + ${[ELEMENTS.PAGE]}`]: {
+      marginBlockStart: "20px",
+    },
+    ...getPaperSizeStyle(ELEMENTS.PAPER, ELEMENTS.PAGE),
     [ELEMENTS.QUESTION]: {
       display: "block",
     },
@@ -77,12 +89,27 @@ export function elementDefaultStyles<Paper extends string>({
     },
     [ELEMENTS.BLANK]: {
       display: "block",
+      minHeight: "1em",
     },
     [ELEMENTS.HEADER]: {
-      display: "block",
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      boxSizing: "border-box",
+      borderBlockEnd: "1px solid #ccc",
+      paddingBlock: "10px 5px",
+      paddingInline: "20px",
     },
     [ELEMENTS.FOOTER]: {
-      display: "block",
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      width: "100%",
+      boxSizing: "border-box",
+      borderBlockStart: "1px solid #ccc",
+      paddingBlock: "5px 10px",
+      paddingInline: "20px",
     },
     [ELEMENTS.STYLED]: {
       display: "block",
@@ -93,44 +120,11 @@ export function elementDefaultStyles<Paper extends string>({
     [ELEMENTS.QUESTION_SCORE]: {
       display: "block",
     },
-    ".exam-paper-table-layout": {
-      width: "100%",
-    },
-    ".print-header, .print-footer": {
-      display: "none",
-    },
-    ".header-placeholder,.footer-placeholder": {
-      display: "none",
-    },
     "@media print": {
       "@page": {
         size,
         boxSizing: "border-box",
         ...paginationPrintConfig,
-      },
-      [`${ELEMENTS.FOOTER}, ${ELEMENTS.HEADER}`]: {
-        display: "none",
-      },
-      [`${ELEMENTS.HEADER}.print-header, ${ELEMENTS.FOOTER}.print-footer`]: {
-        display: "block",
-        position: "fixed",
-        left: 0,
-        width: "100%",
-        backgroundColor: "#ffffff",
-        boxSizing: "border-box",
-      },
-      [`${ELEMENTS.HEADER}.print-header`]: {
-        top: 0,
-        borderBlockEnd: "1px solid #ccc",
-        paddingBlockEnd: "5px",
-      },
-      [`${ELEMENTS.FOOTER}.print-footer`]: {
-        bottom: 0,
-        borderBlockStart: "1px solid #ccc",
-        paddingBlockStart: "5px",
-      },
-      ".header-placeholder,.footer-placeholder": {
-        display: "block",
       },
       [ELEMENTS.QUESTION]: {
         breakInside: "avoid",
@@ -141,6 +135,9 @@ export function elementDefaultStyles<Paper extends string>({
       [`body, ${ELEMENTS.PAPER}`]: {
         padding: "0!important",
         margin: "0!important",
+      },
+      [`${[ELEMENTS.PAGE]} + ${[ELEMENTS.PAGE]}`]: {
+        marginBlockStart: "0!important",
       },
     },
   };
