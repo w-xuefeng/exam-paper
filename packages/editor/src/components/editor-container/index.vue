@@ -8,8 +8,8 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: 'EditorContainer'
-})
+  name: "EditorContainer",
+});
 </script>
 
 <style scoped lang="less">
@@ -18,9 +18,5 @@ defineOptions({
   height: var(--editor-container-height);
   display: flex;
   flex-direction: column;
-
-  .editor-area {
-    flex-grow: 1;
-  }
 }
 </style>

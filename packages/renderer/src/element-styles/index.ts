@@ -14,25 +14,28 @@ import {
 
 export function getPaperSizeStyle(
   paperName: string,
-  pageName: string
+  pageName: string,
+  scale: number | string = 1
 ): Record<string, CSSNestedObjectProperties> {
   return Object.keys(paperSizeMap)
-    .map((size) => ({
-      [`${paperName}[paper="${size}"][direction="portrait"] ${pageName}`]: {
-        width: `${
-          paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
-        }mm`,
-        height: `${
-          paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm
-        }mm`,
-      },
-      [`${paperName}[paper="${size}"][direction="landscape"] ${pageName}`]: {
-        width: `${paperSizeMap[size as BuiltInPaperNameUnionTypes].width_mm}mm`,
-        height: `${
-          paperSizeMap[size as BuiltInPaperNameUnionTypes].height_mm
-        }mm`,
-      },
-    }))
+    .map((size) => {
+      const { height_mm, width_mm } =
+        paperSizeMap[size as BuiltInPaperNameUnionTypes];
+      const max = `${Math.max(height_mm, width_mm)}mm`;
+      const min = `${Math.min(height_mm, width_mm)}mm`;
+      const scaledMax = scale !== 1 ? `calc(${max} * ${scale})` : max;
+      const scaledMin = scale !== 1 ? `calc(${min} * ${scale})` : min;
+      return {
+        [`${paperName}[paper="${size}"][direction="portrait"] ${pageName}`]: {
+          width: scaledMin,
+          height: scaledMax,
+        },
+        [`${paperName}[paper="${size}"][direction="landscape"] ${pageName}`]: {
+          width: scaledMax,
+          height: scaledMin,
+        },
+      };
+    })
     .reduce(
       (t, cv) => Object.assign(t, cv),
       {} as Record<string, CSSNestedObjectProperties>

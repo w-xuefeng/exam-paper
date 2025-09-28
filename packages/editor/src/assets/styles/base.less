@@ -6,9 +6,6 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,6 +21,7 @@
   // app
   --app-min-width: clamp(800px, 100vw, 1920px);
   --app-min-height: clamp(720px, 100vh, 1080px);
+  --color: #000000;
 
   // editor container
   --editor-container-width: 100%;
@@ -36,7 +34,36 @@
   --editor-area-background: #e9e9e9;
   --editor-area-padding: 20px;
 
+  // editor page
+  --editor-page-background: #ffffff;
+  --editor-page-outline-color: #bfbfbf;
+  --editor-page-color: var(--color);
+  --editor-page-padding-block-border-color: #a0a0a0;
+  --editor-page-padding-top: 15mm;
+  --editor-page-padding-right: 15mm;
+  --editor-page-padding-bottom: 15mm;
+  --editor-page-padding-left: 15mm;
+  --editor-page-padding-block-border-size: 18px;
+
   // editor info bar
-  --editor-info-bar-height: 50px;
+  --editor-info-bar-height: 30px;
   --editor-info-bar-background: #d6d6d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: #f5f5f5;
+
+    // editor area
+    --editor-area-background: #242424;
+
+    // editor page
+    --editor-page-background: #222222;
+    --editor-page-outline-color: #bfbfbf;
+    --editor-page-color: var(--color);
+    --editor-page-padding-block-border-color: #a0a0a0;
+
+    // editor info bar
+    --editor-info-bar-background: #3a3a39;
+  }
 }

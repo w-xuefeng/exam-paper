@@ -4,6 +4,7 @@
   "description": "exam-paper monorepo",
   "scripts": {
     "test:renderer": "pnpm --filter renderer test",
+    "build:renderer": "pnpm --filter renderer build",
     "dev:editor": "pnpm --filter editor dev"
   },
   "keywords": [],
