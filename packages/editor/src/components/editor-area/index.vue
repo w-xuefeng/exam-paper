@@ -26,7 +26,7 @@ function applyPageStyles() {
   const styleElement = DOMUtils.handleCSSToStyleElement(
     getPaperSizeStyle(
       ".editor-area",
-      ".editor-page",
+      ".editor-page-container",
       "0.75"
     ) as CSSNestedObjectProperties
   );

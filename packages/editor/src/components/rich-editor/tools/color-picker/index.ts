@@ -1,7 +1,7 @@
 import type { API, InlineToolConstructorOptions } from "@editorjs/editorjs";
 import { IconColor } from "@codexteam/icons";
 
-import "./styles.css";
+import "./styles.less";
 
 export type ColorPickerConfig = {
   colors: string[];

@@ -7,7 +7,7 @@ import {
   type TitleWrapper,
   type StyleTypeUnionTypes,
 } from "@exam-paper/structure";
-import "./style.css";
+import "./style.less";
 
 interface ToolConfig {
   data?: TitleWrapper;

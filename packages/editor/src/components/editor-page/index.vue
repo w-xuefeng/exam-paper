@@ -4,13 +4,16 @@
     <div class="page-padding-block-right-top"></div>
     <div class="page-padding-block-left-bottom"></div>
     <div class="page-padding-block-right-bottom"></div>
-    <div class="editor-page" contenteditable="true" autofocus="true"></div>
+    <div class="editor-page">
+      <RichEditor />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditortore } from "@/stores/editor-store";
 import { onMounted } from "vue";
+import RichEditor from "@/components/rich-editor/rich-editor.vue";
 import type { ExamWidget, PageWrapper } from "@exam-paper/structure";
 
 defineOptions({

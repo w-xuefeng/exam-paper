@@ -8,7 +8,7 @@ import {
   removeClassName,
 } from "./utils";
 
-import "./index.css";
+import "./index.less";
 
 export class TitleTool {
   public data: IData;
