@@ -26,3 +26,16 @@ export namespace StyleType {
    */
   export type CSS = typeof STYLE_TYPE.CSS;
 }
+
+export const STYLE_LOCALES = {
+  zh_CN: {
+    styleType: "样式类型",
+    [STYLE_TYPE.INLINE]: "内联样式",
+    [STYLE_TYPE.CSS]: "CSS样式",
+  },
+  en_US: {
+    styleType: "Style Type",
+    [STYLE_TYPE.INLINE]: "Inline Style",
+    [STYLE_TYPE.CSS]: "CSS Style",
+  },
+};

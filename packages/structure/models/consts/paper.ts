@@ -35,3 +35,22 @@ export namespace BuiltInPaperName {
   export type B4 = (typeof BUILTIN_PAPER_NAME)[9];
   export type B5 = (typeof BUILTIN_PAPER_NAME)[10];
 }
+
+export const PAPER_LOCALES = {
+  zh_CN: {
+    paperDirection: "试卷方向",
+    [PAPER_DIRECTION.PORTRAIT]: "纵向",
+    [PAPER_DIRECTION.LANDSCAPE]: "横向",
+    paginationType: "页码类型",
+    [PAGINATION_TYPE.INNER]: "内页码",
+    [PAGINATION_TYPE.OUTER]: "外页码",
+  },
+  en_US: {
+    paperDirection: "Paper Direction",
+    [PAPER_DIRECTION.PORTRAIT]: "Portrait",
+    [PAPER_DIRECTION.LANDSCAPE]: "Landscape",
+    paginationType: "Pagination Type",
+    [PAGINATION_TYPE.INNER]: "Inner",
+    [PAGINATION_TYPE.OUTER]: "Outer",
+  },
+};

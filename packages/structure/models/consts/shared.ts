@@ -17,7 +17,7 @@ export const STRUCTURAL_TYPE = {
   /**
    * answer
    * 答案
-   * */
+   */
   ANSWER: "answer",
   /**
    * title
@@ -65,7 +65,7 @@ export namespace StructuralType {
   /**
    * answer
    * 答案
-   * */
+   */
   export type ANSWER = typeof STRUCTURAL_TYPE.ANSWER;
   /**
    * title
@@ -93,3 +93,30 @@ export namespace StructuralType {
    */
   export type FOOTER = typeof STRUCTURAL_TYPE.FOOTER;
 }
+
+export const STRUCTURAL_LOCALES = {
+  zh_CN: {
+    structuralType: "结构类型",
+    [STRUCTURAL_TYPE.PAPER]: "纸张",
+    [STRUCTURAL_TYPE.PAGE]: "页面",
+    [STRUCTURAL_TYPE.QUESTION]: "题目",
+    [STRUCTURAL_TYPE.ANSWER]: "答案",
+    [STRUCTURAL_TYPE.TITLE]: "标题",
+    [STRUCTURAL_TYPE.DESCRIPTION]: "描述",
+    [STRUCTURAL_TYPE.BLANK]: "空白",
+    [STRUCTURAL_TYPE.HEADER]: "页眉",
+    [STRUCTURAL_TYPE.FOOTER]: "页脚",
+  },
+  en_US: {
+    structuralType: "Structural Type",
+    [STRUCTURAL_TYPE.PAPER]: "Paper",
+    [STRUCTURAL_TYPE.PAGE]: "Page",
+    [STRUCTURAL_TYPE.QUESTION]: "Question",
+    [STRUCTURAL_TYPE.ANSWER]: "Answer",
+    [STRUCTURAL_TYPE.TITLE]: "Title",
+    [STRUCTURAL_TYPE.DESCRIPTION]: "Description",
+    [STRUCTURAL_TYPE.BLANK]: "Blank",
+    [STRUCTURAL_TYPE.HEADER]: "Header",
+    [STRUCTURAL_TYPE.FOOTER]: "Footer",
+  },
+};
